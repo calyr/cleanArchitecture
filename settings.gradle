@@ -1,0 +1,6 @@
+rootProject.name='CleanMovieApp'
+include ':app'
+include ':domain'
+include ':usecases'
+include ':data'
+include ':framework'
