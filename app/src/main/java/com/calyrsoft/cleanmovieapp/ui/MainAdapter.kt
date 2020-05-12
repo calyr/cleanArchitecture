@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.calyrsoft.cleanmovieapp.R
 import com.calyrsoft.domain.Movie
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_movie.view.*
 
 class MainAdapter(val list: List<Movie>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -23,5 +24,8 @@ class MainAdapter(val list: List<Movie>) : RecyclerView.Adapter<RecyclerView.Vie
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val movie = list.get(position)
         holder.itemView.movie_title.text = movie.title
+        Picasso.get().load("https://image.tmdb.org/t/p/w185/${movie.posterPath}")
+            .into(holder.itemView.movie_image)
+//        holder.itemView.movie_image =
     }
 }

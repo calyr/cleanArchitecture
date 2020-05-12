@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CleanMovieApp</string>
+    <string name="api_key">fa3e844ce31744388e07fa47c7c5d8c3</string>
 </resources>

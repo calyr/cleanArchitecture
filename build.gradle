@@ -46,7 +46,9 @@ allprojects {
                 retrofit                 : 'com.squareup.retrofit2:retrofit:2.6.0',
                 retrofitGsonConverter    : 'com.squareup.retrofit2:converter-gson:2.6.0',
                 retrofitCoroutinesAdapter: 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2',
-                koin                     : "org.koin:koin-android-viewmodel:2.0.1"
+                koin                     : "org.koin:koin-android-viewmodel:2.0.1",
+                picasso                  : "com.squareup.picasso:picasso:2.71828"
+
         ]
 
 

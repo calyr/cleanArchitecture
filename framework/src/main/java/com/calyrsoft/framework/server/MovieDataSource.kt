@@ -7,7 +7,10 @@ import com.calyrsoft.framework.toDomainMovie
 
 class MovieDataSource(val apiRest: RetrofitBuilder) : IRemoteDataSource {
     override suspend fun getPopularMovies(apiKey: String): List<Movie> {
-        val  response = apiRest.apiService.listPopularMovies(apiKey).await().results.map { it.toDomainMovie() }
+        val  response = apiRest.apiService.listPopularMovies(apiKey).results.map { it.toDomainMovie() }
+        response.forEach {
+            println(it)
+        }
         return response
     }
 }
