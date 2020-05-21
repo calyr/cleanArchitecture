@@ -22,7 +22,7 @@ class MainViewModel(private val popularMovies: GetPopularMovie ) : ScopedViewMod
         class Content(val movies: List<Movie>) : UiModel()
     }
 
-    fun loadMovies(apiKey: String) {
+    fun loadMovies() {
         launch {
             _model.value = UiModel.Content(popularMovies.invoke())
         }

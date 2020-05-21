@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         //mainViewModel = MainViewModel(GetPopularMovie(MoviesRepository(MovieDataSource( RetrofitBuilder ), "fa3e844ce31744388e07fa47c7c5d8c3")))
         mainViewModel.model.observe(this, Observer(::updateUi))
 
-        mainViewModel.loadMovies(R.string.api_key.toString())
+        mainViewModel.loadMovies()
 
     }
 
