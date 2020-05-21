@@ -2,26 +2,18 @@ package com.calyrsoft.cleanmovieapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.calyrsoft.cleanmovieapp.R
-import com.calyrsoft.data.MoviesRepository
 import com.calyrsoft.domain.Movie
-import com.calyrsoft.framework.ApiService
-import com.calyrsoft.framework.RetrofitBuilder
-import com.calyrsoft.framework.server.MovieDataSource
-import com.calyrsoft.usecases.GetPopularMovie
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import org.koin.android.scope.currentScope
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var mainViewModel: MainViewModel
+    private val mainViewModel: MainViewModel by currentScope.viewModel(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -39,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         recycler.layoutManager = layoutManager
 
-        mainViewModel = MainViewModel(GetPopularMovie(MoviesRepository(MovieDataSource( RetrofitBuilder ), "fa3e844ce31744388e07fa47c7c5d8c3")))
+        //mainViewModel = MainViewModel(GetPopularMovie(MoviesRepository(MovieDataSource( RetrofitBuilder ), "fa3e844ce31744388e07fa47c7c5d8c3")))
         mainViewModel.model.observe(this, Observer(::updateUi))
 
         mainViewModel.loadMovies(R.string.api_key.toString())
@@ -56,3 +48,4 @@ class MainActivity : AppCompatActivity() {
         recycler.adapter = MainAdapter(list)
     }
 }
+
