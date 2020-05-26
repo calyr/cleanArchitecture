@@ -8,6 +8,8 @@ import com.calyrsoft.data.MoviesRepository
 import com.calyrsoft.framework.RetrofitBuilder
 import com.calyrsoft.framework.server.MovieDataSource
 import com.calyrsoft.usecases.GetPopularMovie
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -26,11 +28,12 @@ fun AndroidApplication.initDI() {
 
 private val appModule = module {
     single(named("apiKey")) { androidApplication().getString(R.string.api_key) }
+    single<CoroutineDispatcher> { Dispatchers.Main}
+    factory<IRemoteDataSource> { MovieDataSource(get())  }
 }
 
-private val dataModule = module {
+val dataModule = module {
     factory { MoviesRepository(get(), get(named("apiKey")))  }
-    factory<IRemoteDataSource> { MovieDataSource(get())  }
 }
 
 private val frameworkModule = module {
@@ -39,7 +42,7 @@ private val frameworkModule = module {
 
 private val scopeModule = module {
     scope(named<MainActivity>()) {
-        viewModel { MainViewModel(get()) }
+        viewModel { MainViewModel(get(), get()) }
         scoped { GetPopularMovie(get()) }
     }
 }

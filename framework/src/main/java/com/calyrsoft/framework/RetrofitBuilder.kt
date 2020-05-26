@@ -16,8 +16,8 @@ object RetrofitBuilder {
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-//            .client(okHttpClient)
-//            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .client(okHttpClient)
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

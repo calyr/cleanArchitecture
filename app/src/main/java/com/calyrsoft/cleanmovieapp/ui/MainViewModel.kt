@@ -6,11 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.calyrsoft.domain.Movie
 import com.calyrsoft.movieapp.common.ScopedViewModel
 import com.calyrsoft.usecases.GetPopularMovie
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class MainViewModel(private val popularMovies: GetPopularMovie ) : ScopedViewModel() {
+class MainViewModel(private val popularMovies: GetPopularMovie, uiDispatcher: CoroutineDispatcher) : ScopedViewModel(uiDispatcher) {
     init {
         initScope()
     }
@@ -19,7 +20,7 @@ class MainViewModel(private val popularMovies: GetPopularMovie ) : ScopedViewMod
         get() = _model
 
     sealed class UiModel() {
-        class Content(val movies: List<Movie>) : UiModel()
+        data class Content(val movies: List<Movie>) : UiModel()
     }
 
     fun loadMovies() {
